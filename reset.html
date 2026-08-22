@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Redirecting...</title>
+  <script>
+    // Extract the token from the URL and redirect to the app
+    const hash = window.location.hash;
+    const params = new URLSearchParams(hash.replace('#', '?'));
+    const accessToken = params.get('access_token');
+    const refreshToken = params.get('refresh_token');
+    const type = params.get('type');
+
+    if (accessToken) {
+      // Redirect to app using custom scheme
+      window.location.href = `elevenplusapp://reset?access_token=${accessToken}&refresh_token=${refreshToken}&type=${type}`;
+    } else {
+      document.getElementById('message').textContent = 'Invalid or expired reset link. Please request a new one.';
+    }
+  </script>
+</head>
+<body>
+  <div style="font-family: Arial, sans-serif; text-align: center; padding: 60px 20px;">
+    <h2 style="color: #4A6FA5;">11+ Practice Makes Perfect</h2>
+    <p id="message" style="color: #666;">Opening the app to reset your password...</p>
+    <p style="color: #999; font-size: 13px; margin-top: 20px;">
+      If the app doesn't open automatically, please open it manually.
+    </p>
+  </div>
+</body>
+</html>
